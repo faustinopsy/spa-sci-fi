@@ -99,3 +99,83 @@ body {
     border: 1px solid var(--primary-color);
     box-shadow: 0 0 10px var(--primary-color);
 }
+
+/* --- Adicionar ao neon-blue.css --- */
+
+/* Inputs Transparentes Futuristas */
+.scifi-input {
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--primary-color);
+    color: #fff;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    width: 200px;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+}
+
+.scifi-input:focus {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: 0 0 10px var(--grid-color);
+}
+
+/* Botões HUD */
+.scifi-btn {
+    background: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 10px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+.scifi-btn:hover {
+    background: var(--primary-color);
+    color: #000;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+.scifi-btn:active {
+    transform: scale(0.95);
+}
+
+.btn-danger {
+    border-color: #ff3333;
+    color: #ff3333;
+}
+.btn-danger:hover {
+    background: #ff3333;
+    box-shadow: 0 0 15px #ff3333;
+}
+
+.nav-brand {
+    font-weight: bold;
+    color: var(--primary-color);
+    border-right: 1px solid rgba(255,255,255,0.2);
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #0f0;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #0f0;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
