@@ -1,21 +1,46 @@
 import './style.css';
+import { App } from './core/App.js';
+import { Home } from './pages/Home.js';
+import { Sobre } from './pages/Sobre.js';
+import { Navbar } from './components/Navbar.js';
+import { InputController } from './core/InputController.js';
 import { SciFiLayout } from './components/SciFiLayout.js';
+import { CleanLayout } from './components/CleanLayout.js';
+import { LayoutManager } from './core/LayoutManager.js';
+
+LayoutManager.setLayout(SciFiLayout);
+
+App
+.use(Home)
+.use(Sobre);
 
 document.addEventListener('DOMContentLoaded', () => {
-    const app = document.getElementById('app');
-    const homeContent = document.createElement('div');
-    homeContent.innerHTML = `
-        <h1>Sistema Inicializado</h1>
-        <p>A arquitetura modular visual está ativa.</p>
-        <br>
-        <p style="font-size: 0.8em; opacity: 0.8;">:: ACCESS GRANTED ::</p>
-        <div style="margin-top: 30px; border: 1px solid var(--primary-color); padding: 10px 30px; border-radius: 4px; display: inline-block; cursor: pointer;">
-            START ENGINE
-        </div>
-    `;
-
-    const card = SciFiLayout.wrap(homeContent);
-    app.appendChild(card);
+    const navbar = new Navbar();
+    navbar.render();
     
-    console.log('Renderização Visual de Teste Concluída');
+    App.start();
+    new InputController();
+
+    createThemeSwitcher();
 });
+
+function createThemeSwitcher() {
+    const btn = document.createElement('button');
+    btn.innerText = 'Trocar Engine Visual';
+    btn.style.cssText = 'position: fixed; top: 10px; right: 10px; z-index: 9999; padding: 10px; cursor: pointer;';
+    
+    let isSciFi = true;
+
+    btn.onclick = () => {
+        if (isSciFi) {
+            LayoutManager.setLayout(CleanLayout);
+            document.body.style.background = '#f0f0f0'; 
+        } else {
+            LayoutManager.setLayout(SciFiLayout);
+            document.body.style.background = '#000';
+        }
+        isSciFi = !isSciFi;
+    };
+
+    document.body.appendChild(btn);
+}

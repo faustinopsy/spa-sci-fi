@@ -1,15 +1,10 @@
 :root {
-    --primary-color: #00f3ff; 
+    --primary-color: #00f3ff;
     --secondary-color: #0066ff;
     --glass-bg: rgba(5, 10, 20, 0.75);
     --grid-color: rgba(0, 243, 255, 0.1);
     --border-width: 2px;
-    --card-shape: polygon(
-        5% 0, 95% 0, 
-        100% 10%, 100% 90%, 
-        95% 100%, 5% 100%, 
-        0 90%, 0 10%
-    );
+    --card-shape: polygon(5% 0, 95% 0, 100% 10%, 100% 90%, 95% 100%, 5% 100%, 0 90%, 0 10%);
 }
 
 body {
@@ -35,10 +30,7 @@ body {
 
 .scifi-card-glass {
     position: absolute;
-    top: var(--border-width); 
-    left: var(--border-width); 
-    right: var(--border-width); 
-    bottom: var(--border-width);
+    top: var(--border-width); left: var(--border-width); right: var(--border-width); bottom: var(--border-width);
     background: var(--glass-bg);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -53,11 +45,57 @@ body {
     text-transform: uppercase;
     letter-spacing: 4px;
     text-shadow: 0 0 10px var(--primary-color);
-    margin-bottom: 10px;
 }
 
 .scifi-content p {
     color: #ccf;
     font-size: 1.1rem;
-    max-width: 600px;
+}
+
+/* Navbar Style */
+.scifi-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px;
+    background: rgba(0, 5, 10, 0.8);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid var(--primary-color);
+    box-shadow: 0 5px 20px rgba(0, 243, 255, 0.1);
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+    width: fit-content;
+    margin: 0 auto 20px auto;
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    transform: translateX(-50%);
+    z-index: 100;
+
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+    text-shadow: 0 0 8px var(--primary-color);
+}
+
+.nav-link.active {
+    color: #fff;
+    background: rgba(0, 243, 255, 0.1);
+    border: 1px solid var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
 }
