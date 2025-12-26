@@ -1,0 +1,63 @@
+:root {
+    --primary-color: #00f3ff; 
+    --secondary-color: #0066ff;
+    --glass-bg: rgba(5, 10, 20, 0.75);
+    --grid-color: rgba(0, 243, 255, 0.1);
+    --border-width: 2px;
+    --card-shape: polygon(
+        5% 0, 95% 0, 
+        100% 10%, 100% 90%, 
+        95% 100%, 5% 100%, 
+        0 90%, 0 10%
+    );
+}
+
+body {
+    background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center center;
+    box-shadow: inset 0 0 150px #000; 
+}
+
+.scifi-card-wrapper {
+    filter: drop-shadow(0 0 15px var(--secondary-color));
+}
+
+.scifi-card-border {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--primary-color);
+    clip-path: var(--card-shape);
+    z-index: 0;
+}
+
+.scifi-card-glass {
+    position: absolute;
+    top: var(--border-width); 
+    left: var(--border-width); 
+    right: var(--border-width); 
+    bottom: var(--border-width);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    clip-path: var(--card-shape);
+    z-index: 1;
+    background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+.scifi-content h1 {
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-shadow: 0 0 10px var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.scifi-content p {
+    color: #ccf;
+    font-size: 1.1rem;
+    max-width: 600px;
+}
