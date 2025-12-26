@@ -1,6 +1,6 @@
 import { Component } from '../core/Component.js';
 import { Store } from '../core/Store.js';
-
+import { CircularWidget } from '../components/CircularWidget.js';
 export class Home extends Component {
     static get metadata() {
         return { path: '/', label: 'Comando', icon: 'fa-gamepad' };
@@ -8,43 +8,56 @@ export class Home extends Component {
 
     render() {
         const state = Store.getState();
-        
         return `
             <div class="dashboard-panel">
                 <h1>Painel de Comando</h1>
-                <div class="hud-stat-row">
-                    <p>STATUS DO SISTEMA: <strong style="color: var(--primary-color)">${state.systemStatus}</strong></p>
-                </div>
                 
-                <br>
-                
-                <div class="control-group">
-                    <label>Alterar Identificação:</label>
-                    <input type="text" id="input-name" value="${state.user}" class="scifi-input">
-                    <button id="btn-update" class="scifi-btn">ATUALIZAR DADOS</button>
+                <div style="display: flex; justify-content: center; gap: 20px; margin: 20px 0;">
+                    <div id="widget-cpu"></div>
+                    <div id="widget-shield"></div>
                 </div>
 
-                <div class="control-group" style="margin-top: 20px;">
-                    <button id="btn-alert" class="scifi-btn btn-danger">SIMULAR ALERTA</button>
+                <div class="control-group">
+                    <p>STATUS: <strong>${state.systemStatus}</strong></p>
+                    <input type="text" id="input-name" value="${state.user}" class="scifi-input">
+                    <button id="btn-update" class="scifi-btn">ATUALIZAR</button>
                 </div>
             </div>
         `;
     }
 
     afterMount() {
-        const input = this.element.querySelector('#input-name');
+        const state = Store.getState();
+        const cpuWidget = new CircularWidget(
+            this.element.querySelector('#widget-cpu'), 
+            'REACTOR', 
+            'var(--primary-color)'
+        );
+
+        const shieldWidget = new CircularWidget(
+            this.element.querySelector('#widget-shield'), 
+            'SHIELDS', 
+            '#00ff00' 
+        );
+
+        this.interval = setInterval(() => {
+            const cpuVal = Math.floor(Math.random() * 100);
+            const shieldVal = Math.floor(Math.random() * 20) + 80;
+            const valor = state.user? state.user : 0;
+
+            cpuWidget.setValue(cpuVal);
+            shieldWidget.setValue(valor);
+
+        }, 2000);
+
         const btnUpdate = this.element.querySelector('#btn-update');
-        const btnAlert = this.element.querySelector('#btn-alert');
-
+        const input = this.element.querySelector('#input-name');
         btnUpdate.addEventListener('click', () => {
-            const newName = input.value;
-            if(newName) {
-                Store.commit('user', newName);
-            }
+            if(input.value) Store.commit('user', input.value);
         });
+    }
 
-        btnAlert.addEventListener('click', () => {
-            Store.commit('systemStatus', 'CRÍTICO');
-        });
+    beforeUnmount() {
+        if (this.interval) clearInterval(this.interval);
     }
 }

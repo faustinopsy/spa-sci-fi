@@ -100,9 +100,7 @@ body {
     box-shadow: 0 0 10px var(--primary-color);
 }
 
-/* --- Adicionar ao neon-blue.css --- */
 
-/* Inputs Transparentes Futuristas */
 .scifi-input {
     background: rgba(0, 0, 0, 0.5);
     border: 1px solid var(--primary-color);
@@ -121,7 +119,6 @@ body {
     box-shadow: 0 0 10px var(--grid-color);
 }
 
-/* Botões HUD */
 .scifi-btn {
     background: transparent;
     color: var(--primary-color);
@@ -178,4 +175,63 @@ body {
     0% { opacity: 1; }
     50% { opacity: 0.5; }
     100% { opacity: 1; }
+}
+
+
+.hud-widget {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.progress-ring {
+    transform: rotate(-90deg); 
+    z-index: 2;
+}
+
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.5s ease-in-out, stroke 0.3s;
+    stroke-linecap: round; /* Ponta arredondada */
+    filter: drop-shadow(0 0 5px var(--primary-color));
+}
+
+.hud-text {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.hud-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+.hud-label {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+}
+
+.hud-spinner {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border: 2px dashed rgba(0, 243, 255, 0.3);
+    border-radius: 50%;
+    animation: spin-slow 10s linear infinite;
+    z-index: 1;
+    scale: 1.1;
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
